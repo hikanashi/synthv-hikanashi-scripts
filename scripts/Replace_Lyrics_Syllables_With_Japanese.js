@@ -23,45 +23,54 @@ function main() {
     // 変換表
     const syllableReplacementTable = [
         ["ah","あ"],
-        ["ba","ば"],
-        ["va","ば"],
-        ["ban","ばん"],
-        ["van","ばん"],
+        ["sha","しゃ"],
+        ["ta","た"],
+        ["tat","たっ"],
         ["da","だ"],
+        ["dat","だっ"],
+        ["dut","だっ"],
         ["dan","だん"],
+        ["na","な"],
         ["ha","は"],
         ["hah","は"],
         ["han","は"],
         ["fah","ふぁ"],
+        ["ba","ば"],
+        ["va","ば"],
+        ["ban","ばん"],
+        ["van","ばん"],
+        ["pa","ぱ"],
+        ["pat","ぱっ"],
+        ["pan","ぱん"],
+        ["paun","ぱん"],
+        ["pam","ぱん"],
         ["la","ら"],
         ["ra","ら"],
+        ["lat","らっ"],
+        ["rat","らっ"],
         ["lan","らん"],
         ["ran","らん"],
-        ["ta","た"],
-        ["na","な"],
-        ["pa","ぱ"],
-        ["pan","ぱん"],
-        ["pam","ぱん"],
-        ["sha","しゃ"],
         ["wa","わ"],
-        ["wah","わ"],
         ["wha","わ"],
+        ["wah","わ"],
+        ["wat","わっ"],
+        ["what","わっ"],
         ["ya","や"],
 
         ["ih","ぃ"],
-        ["li","り"],
+        ["yeah","いぇ"],
+        ["wee","うぃ"],
         ["ti","てぃ"],
         ["di","でぃ"],
-        ["wee","うぃ"],
-        ["yeah","いぇ"],
+        ["li","り"],
         
         ["oo","う"],
         ["uh","う"],
-        ["fu","ふ"],
-        ["hoo","ふ"],
         ["shu","しゅ"],
         ["to","とぅ"],
         ["tu","とぅ"],
+        ["tut","とぅっ"],
+        ["toot","とぅっ"],
         ["too","とぅ"],
         ["tm","とぅん"],
         ["tn","とぅん"],
@@ -74,30 +83,36 @@ function main() {
         ["doot","どぅっ"],
         ["dm","どぅん"],
         ["dn","どぅん"],
+        ["fu","ふ"],
+        ["hoo","ふ"],
         ["lu","る"],
         ["ru","る"],
-        ["lm","るん"],
         ["loo","る"],
+        ["lut","るっ"],
+        ["rut","るっ"],
         ["loot","るっ"],
+        ["lm","るん"],
         ["n","ん"],
         ["hn","ん"],
         ["hm","ん"],
         ["hun","ふん"],
         ["hum","ふん"],
 
-
         ["pe","ぺ"],
         ["hey","へい"],
         
-        ["oh","お"],
-        ["ohi","おーぃ"],
-        ["doh","どぉ"],
-        ["ho","ほ"],
+        ["wo","うぉ"],
         ["woh","うぉ"],
         ["woo","うぉ"],
+        ["wow","うぉぅ"],
         ["whoo","うぉ"],
+        ["oh","お"],
+        ["ohh","お"],
+        ["ohi","おーぃ"],
+        ["doh","どぉ"],
         ["fon","ふぉん"],
         ["fom","ふぉん"],
+        ["ho","ほ"],
         ["pon","ぽん"],
         ["pom","ぽん"],
         ["pn","ぽん"],
@@ -105,19 +120,34 @@ function main() {
     
     ];
 
-    // NoteGroupを取得
+
     var scope = SV.getMainEditor().getCurrentGroup();
-    var group = scope.getTarget();
-    
-    for (var n = 0; n < group.getNumNotes();) {
-        var note = group.getNote(n);
-        n++;
-        if(changeLyric(note, syllableReplacementTable) != true){
+    var noteGroup = scope.getTarget();
+    changeLyricNoteGroup(noteGroup, syllableReplacementTable);
+
+    // var project = SV.getProject();
+    // var noteGroupNum = project.getNumNoteGroupsInLibrary();
+    // for(var ng = 0; ng < noteGroupNum; ng++) {
+    //     var noteGroup = project.getNoteGroup(ng);
+    //     changeLyricNoteGroup(noteGroup, syllableReplacementTable);
+    // }
+
+    SV.finish();
+}
+
+// ノートグループ変換処理
+// 変換処理を継続するならtrue
+function changeLyricNoteGroup(noteGroup, replaceTable) {
+    if(noteGroup === undefined) {
+        conitunue;
+    }
+
+    for(var nidx = 0; nidx < noteGroup.getNumNotes(); nidx++) {
+        var note = noteGroup.getNote(nidx);
+        if(changeLyric(note, replaceTable) != true){
             break;
         }
     }
-
-    SV.finish();
 }
 
 
