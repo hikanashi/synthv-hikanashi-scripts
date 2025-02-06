@@ -1,0 +1,10 @@
+{
+    "name": "@hikanashi/synthv-hikanashi-scripts",
+    "author": "hikanashi",
+    "version": "0.0.1",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/hikanashi/synthv-hikanashi-scripts.git"
+    },
+    "license": "MIT"
+}
